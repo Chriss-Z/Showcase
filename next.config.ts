@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
   allowedDevOrigins: ["sponge-legwarmer-defection.ngrok-free.dev"],
   /* config options here */
   experimental: {

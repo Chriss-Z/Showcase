@@ -56,3 +56,45 @@ html {
 html {
   scroll-behavior: smooth;
 }
+/* Tempel di app/globals.css */
+
+/* Tahap 1: lanyard turun dari atas */
+.lanyard-drop {
+  transform-origin: top center;
+  animation: lanyard-drop 1.1s cubic-bezier(0.22, 1.2, 0.36, 1) 0.6s both;
+}
+
+/* Tahap 2: lanyard berayun pelan seperti bandul, terus-menerus */
+.lanyard-swing {
+  transform-origin: top center;
+  animation: lanyard-swing 6s ease-in-out 1.7s infinite;
+}
+
+@keyframes lanyard-drop {
+  from {
+    transform: translateY(-110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes lanyard-swing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lanyard-drop,
+  .lanyard-swing {
+    animation: none;
+  }
+}

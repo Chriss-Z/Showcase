@@ -1,21 +1,26 @@
 "use client";
 import Typewriter from "./components/Typewriter";
+import Lanyard from "./components/lanyard";
 import { projects } from "./data/projects";
 import { useState, useCallback, useEffect } from "react";
+import PhotoCarousel from "./components/PhotoCarousel";
 
 const links = [
   { label: "About Me", href: "#about" },
-  { label: "Project", href: "#projects" },
+  { label: "Experience & Project", href: "#projects" },
   { label: "Contact Me", href: "#contact" },
 ];
 
+const filters = ["All", "Experience", "Project"] as const;
+type Filter = (typeof filters)[number];
+
 const skills = [
-  "TypeScript",
-  "React",
-  "Next.js",
-  "Tailwind CSS",
-  "Node.js",
-  "Git & GitHub",
+  "Web Development",
+  "Full Stack Development",
+  "DevOps Engineering",
+  "Leadership",
+  "Problem Solving",
+  "Communication",
 ];
 
 const contacts = [
@@ -36,13 +41,16 @@ export default function Home() {
   const [done, setDone] = useState(false);
   const [active, setActive] = useState("about");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [filter, setFilter] = useState<Filter>("All");
+
+  const visibleItems =
+    filter === "All" ? projects : projects.filter((p) => p.type === filter);
 
   const handleDone = useCallback(
     () => setTimeout(() => setDone(true), 500),
     [],
   );
 
-  // Scroll to About once the intro typing has finished
   useEffect(() => {
     if (!done) return;
     const t = setTimeout(() => {
@@ -51,7 +59,6 @@ export default function Home() {
     return () => clearTimeout(t);
   }, [done]);
 
-  // Highlight (underline) the link of the section currently in view
   useEffect(() => {
     if (!done) return;
     const observer = new IntersectionObserver(
@@ -186,24 +193,29 @@ export default function Home() {
         <div className="fade-in mx-auto max-w-5xl px-6">
           {/* About */}
           <section id="about" className="min-h-screen pt-32">
-            <h2 className="mb-6 text-3xl font-bold">About Me</h2>
-            <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
-              <div className="max-w-xl space-y-4 text-gray-300">
-                <p>
-                  I&apos;m Chriss, a web developer who builds clean, fast and
-                  accessible websites. Write a short introduction here: where
-                  you are from, what you study or do, and what kind of work you
-                  enjoy.
-                </p>
-                <p>
-                  Add one or two sentences about what you are currently learning
-                  or looking for, such as an internship, a junior role, or
-                  freelance projects.
-                </p>
-              </div>
+            <div className="grid items-start gap-10 md:grid-cols-[18rem_1fr] md:gap-16">
+              <Lanyard photo="/foto.jpeg" />
 
               <div>
-                <h3 className="mb-3 text-lg font-semibold">Skills</h3>
+                <h2 className="mb-6 text-3xl font-bold">About Me</h2>
+                <div className="max-w-xl space-y-4 text-gray-300">
+                  <p>
+                    I&apos;m Chriss, seorang calon profesional di bidang
+                    teknologi yang memiliki ketertarikan pada pengembangan
+                    perangkat lunak dan pengembangan web. Saat ini, saya sedang
+                    menempuh pendidikan di program studi Sistem Informasi Telkom
+                    University. Saya senang mempelajari hal baru, mengeksplorasi
+                    teknologi, serta membangun solusi digital yang bermanfaat
+                    dan mudah digunakan.
+                  </p>
+                  <p>
+                    Add one or two sentences about what you are currently
+                    learning or looking for, such as an internship, a junior
+                    role, or freelance projects.
+                  </p>
+                </div>
+
+                <h3 className="mb-3 mt-10 text-lg font-semibold">Skills</h3>
                 <ul className="flex flex-wrap gap-2">
                   {skills.map((s) => (
                     <li
@@ -218,37 +230,80 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Projects */}
+          {/* Experience & Project */}
           <section id="projects" className="min-h-screen pt-28">
-            <h2 className="mb-6 text-3xl font-bold">Project</h2>
+            <h2 className="mb-6 text-3xl font-bold">
+              Experience &amp; Project
+            </h2>
+
+            {/* Filter */}
+            <div
+              className="mb-8 flex flex-wrap gap-2"
+              role="group"
+              aria-label="Filter experience and project"
+            >
+              {filters.map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setFilter(f)}
+                  aria-pressed={filter === f}
+                  className={`rounded-full px-4 py-1.5 text-sm transition ${
+                    filter === f
+                      ? "bg-white text-gray-900"
+                      : "bg-[#2a2a36] text-gray-300 hover:bg-[#34344a]"
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {projects.map((p) => (
+              {visibleItems.map((p) => (
                 <article
                   key={p.title}
-                  className="flex flex-col rounded-xl bg-[#1a1a22] p-5 transition hover:-translate-y-1"
+                  className="flex flex-col overflow-hidden rounded-xl bg-[#1a1a22] transition hover:-translate-y-1"
                 >
-                  <h3 className="mb-2 text-xl font-semibold">{p.title}</h3>
-                  <p className="mb-3 text-sm text-gray-400">{p.description}</p>
-                  <div className="mb-4 flex flex-wrap gap-2">
-                    {p.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full bg-[#2a2a36] px-3 py-1 text-xs"
+                  <PhotoCarousel
+                    images={p.images ?? []}
+                    alt={p.title}
+                    duration={p.duration}
+                  />
+
+                  <div className="flex flex-1 flex-col p-5">
+                    <span className="mb-2 w-fit rounded-full border border-white/15 px-2.5 py-0.5 text-xs text-gray-300">
+                      {p.type}
+                    </span>
+                    <h3 className="mb-2 text-xl font-semibold">{p.title}</h3>
+                    <p className="mb-3 text-sm text-gray-400">
+                      {p.description}
+                    </p>
+
+                    {p.tech && p.tech.length > 0 && (
+                      <div className="mb-4 flex flex-wrap gap-2">
+                        {p.tech.map((t) => (
+                          <span
+                            key={t}
+                            className="rounded-full bg-[#2a2a36] px-3 py-1 text-xs"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {p.link && (
+                      <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-auto text-sm text-indigo-400 hover:underline"
                       >
-                        {t}
-                      </span>
-                    ))}
+                        View details →
+                      </a>
+                    )}
                   </div>
-                  {p.link && (
-                    <a
-                      href={p.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-auto text-sm text-indigo-400 hover:underline"
-                    >
-                      View project →
-                    </a>
-                  )}
                 </article>
               ))}
             </div>
