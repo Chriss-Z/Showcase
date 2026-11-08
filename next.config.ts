@@ -2,25 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
+
+  basePath: "/Showcase",
+
   images: {
     unoptimized: true,
   },
-  basePath: "/Showcase",
+
   allowedDevOrigins: ["sponge-legwarmer-defection.ngrok-free.dev"],
-  /* config options here */
-  experimental: {
-    agentFeedback: true,
-  },
-  cacheComponents: true,
-  partialPrefetching: true,
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
-  },
 };
 
 export default nextConfig;
