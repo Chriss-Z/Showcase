@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   basePath: "/Showcase",
-  assetPrefix: "/Showcase",
+  assetPrefix: "/Showcase/",
   allowedDevOrigins: ["sponge-legwarmer-defection.ngrok-free.dev"],
   /* config options here */
   experimental: {
