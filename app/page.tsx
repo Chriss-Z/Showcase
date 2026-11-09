@@ -24,16 +24,20 @@ const skills = [
 ];
 
 const contacts = [
-  { label: "Email", value: "email@kamu.com", href: "mailto:email@kamu.com" },
+  {
+    label: "Email",
+    value: "itss.chrissz@gmail.com",
+    href: "mailto:itss.chrissz@gmail.com",
+  },
   {
     label: "GitHub",
     value: "github.com/Chriss-Z",
-    href: "https://github.com/",
+    href: "https://github.com/Chriss-Z",
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/username",
-    href: "https://linkedin.com/",
+    value: "linkedin.com/in/christianprawiragunawan",
+    href: "https://www.linkedin.com/in/christianprawiragunawan/",
   },
 ];
 

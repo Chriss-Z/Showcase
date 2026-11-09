@@ -16,7 +16,7 @@ export const projects: Item[] = [
     title: "Duta SPMB",
     description:
       "Sebagai Duta SPMB, saya mewakili sekolah dalam kegiatan roadshow untuk mempresentasikan program dan fasilitas unggulan kepada calon siswa baru. Pengalaman ini secara langsung melatih kepercayaan diri dan mengasah kemampuan public speaking saya di depan banyak orang.",
-    images: ["/duta.jpg",],
+    images: ["/duta.jpg"],
     duration: 3000,
     tech: ["Communication"],
   },
@@ -33,7 +33,16 @@ export const projects: Item[] = [
     title: "BeanFlow",
     description:
       "BeanFlow adalah sistem Point of Sale terintegrasi untuk coffee shop yang mengotomatisasi pencatatan penjualan sekaligus perhitungan gaji karyawan.",
-    images: [],
+    images: [
+      "/BNF1.png",
+      "/Beanflow.png",
+      "/BNF2.png",
+      "/BNF3.png",
+      "/BNF4.png",
+      "/BNF5.png",
+      "/BNF6.png",
+      "/BNF7.png",
+    ], // placeholder
     tech: ["Full Stack", "React", "Laravel", "MySQL"],
     link: "https://github.com/Chriss-Z/Bean-Flow",
   },
