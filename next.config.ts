@@ -1,15 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-
-  basePath: "/Showcase",
+  allowedDevOrigins: ["sponge-legwarmer-defection.ngrok-free.dev"],
 
   images: {
     unoptimized: true,
+    qualities: [75, 90],
   },
-
-  allowedDevOrigins: ["sponge-legwarmer-defection.ngrok-free.dev"],
 };
 
 export default nextConfig;

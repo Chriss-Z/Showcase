@@ -93,6 +93,7 @@ export default function PhotoCarousel({ images, alt, duration = 4000 }: Props) {
             src={src}
             alt={`${alt} - foto ${i + 1}`}
             fill
+            loading={i === 0 ? "eager" : "lazy"}
             quality={90}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             aria-hidden={i !== index}

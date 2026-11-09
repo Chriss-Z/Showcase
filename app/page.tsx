@@ -27,7 +27,7 @@ const contacts = [
   { label: "Email", value: "email@kamu.com", href: "mailto:email@kamu.com" },
   {
     label: "GitHub",
-    value: "github.com/username",
+    value: "github.com/Chriss-Z",
     href: "https://github.com/",
   },
   {
