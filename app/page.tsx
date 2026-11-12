@@ -322,7 +322,7 @@ export default function Home() {
             </p>
 
             <a
-              href="mailto:email@kamu.com"
+              href="mailto:christianprawiragunawanz@gmail.com"
               className="inline-block rounded-full bg-white px-6 py-3 font-medium text-gray-900 transition hover:bg-indigo-100"
             >
               Send an email
